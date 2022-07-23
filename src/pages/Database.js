@@ -2,6 +2,7 @@ import React from "react";
 import {mainNavbarItems} from "../consts/navbaritems";
 import {Box} from "@mui/material";
 import Typography from "@mui/material/Typography";
+import DatabaseAccordion from "../components/DatabaseAccordion";
 
 const Database = () => {
     return (
@@ -17,6 +18,7 @@ const Database = () => {
                     fontWeight: 'bold',
                 }}
             >{mainNavbarItems[1].label}</Typography>
+            <DatabaseAccordion/>
         </Box>
     )
 }
