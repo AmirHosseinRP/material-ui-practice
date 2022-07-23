@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Navbar from './components/Navbar'
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Authentication from "./pages/Authentication";
 import Database from "./pages/Database";

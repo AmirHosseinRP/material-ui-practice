@@ -1,13 +1,13 @@
 import React from "react";
-import Grid from "@mui/material/Grid";
+import {Box} from "@mui/material";
 
 const Functions = () => {
     return (
-        <Grid item xs={8}>
+        <Box>
             <h1>
                 Functions page
             </h1>
-        </Grid>
+        </Box>
     )
 }
 

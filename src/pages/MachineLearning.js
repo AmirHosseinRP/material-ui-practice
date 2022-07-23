@@ -1,13 +1,13 @@
 import React from "react";
-import Grid from "@mui/material/Grid";
+import {Box} from "@mui/material";
 
 const MachineLearning = () => {
     return (
-        <Grid item xs={8}>
+        <Box item xs={8}>
             <h1>
                 Machine learning page
             </h1>
-        </Grid>
+        </Box>
     )
 }
 
