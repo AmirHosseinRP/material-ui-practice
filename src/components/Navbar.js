@@ -60,7 +60,7 @@ function NavBar(props) {
                         component="div"
                         sx={{flexGrow: 1, display: {xs:'none',sm: 'none', md: 'block'}}}
                     >
-                        MUI
+                        Material UI
                     </Typography>
                     <Box sx={{display: {xs:'none',sm: 'none', md: 'flex'}}}>
                         {mainNavbarItems.map((item) => (
