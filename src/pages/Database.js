@@ -1,14 +1,23 @@
 import React from "react";
-import Grid from "@mui/material/Grid";
+import {mainNavbarItems} from "../consts/navbaritems";
+import {Box} from "@mui/material";
+import Typography from "@mui/material/Typography";
 
 const Database = () => {
     return (
-        <Grid item xs={8}>
-            <h1>
-                Database page
-            </h1>
-        </Grid>
+        <Box sx={{
+            padding: '30px 0 10px 20px',
+            fontWeight: 'bold',
+        }}>
+            <Typography
+                variant="h3"
+                component="div"
+                sx={{
+                    padding: '0 0 20px 0',
+                    fontWeight: 'bold',
+                }}
+            >{mainNavbarItems[1].label}</Typography>
+        </Box>
     )
 }
-
 export default Database;

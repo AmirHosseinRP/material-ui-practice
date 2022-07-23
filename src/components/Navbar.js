@@ -31,16 +31,13 @@ const menuStyle = {
     }
 };
 
-function NavBar(props) {
-    const {window} = props;
+function NavBar() {
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
 
-
-    const container = window !== undefined ? () => window().document.body : undefined;
 
     return (
         <Box>
@@ -77,7 +74,6 @@ function NavBar(props) {
             </AppBar>
             <Box component="nav" sx={{p:3}}>
                 <Drawer
-                    container={container}
                     variant="temporary"
                     open={mobileOpen}
                     onClose={handleDrawerToggle}
