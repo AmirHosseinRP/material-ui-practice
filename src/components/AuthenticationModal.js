@@ -1,8 +1,11 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import {useState} from "react";
+import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
+import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
+import PrimaryButton from "./PrimaryButton";
 
 const style = {
     position: 'absolute',
@@ -20,10 +23,17 @@ function AuthenticationModal() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [btnText,btnTextSet] = useState(()=><SentimentVeryDissatisfiedIcon/>);
+    function hoverIn() {
+        btnTextSet(()=><SentimentSatisfiedAltIcon/>);
+    }
+    function hoverOut() {
+        btnTextSet(()=><SentimentVeryDissatisfiedIcon/>);
+    }
 
     return (
         <div>
-            <Button onClick={handleOpen}>Open modal</Button>
+            <PrimaryButton onMouseEnter={hoverIn} onMouseLeave={hoverOut} onClick={handleOpen}>{btnText}</PrimaryButton>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -32,10 +42,10 @@ function AuthenticationModal() {
             >
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Text in a modal
+                        DID YOU JUST CLICK THAT??
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                        boos pas :(
                     </Typography>
                 </Box>
             </Modal>
