@@ -1,8 +1,8 @@
 import React from "react";
 import {Button} from "@mui/material";
 
-const PrimaryButton = ({children}) => {
-    let innerHTMLText = children;
+function PrimaryButton(props) {
+    let innerHTMLText = props.children;
     const myStyle = {
         transition : 'all 0.3s',
         '&:hover' : {
@@ -13,7 +13,7 @@ const PrimaryButton = ({children}) => {
         }
     }
     return (
-        <Button variant={"contained"} sx={myStyle}>{innerHTMLText}</Button>
+        <Button variant={"contained"} onClick={props.onClick} onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} sx={myStyle}>{innerHTMLText}</Button>
     )
 }
 
