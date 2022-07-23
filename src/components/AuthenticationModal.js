@@ -42,10 +42,10 @@ function AuthenticationModal() {
             >
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
-                        DID YOU JUST CLICK THAT??
+                        Modal Header
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        boos pas :(
+                        this is gonna be the modal body
                     </Typography>
                 </Box>
             </Modal>
