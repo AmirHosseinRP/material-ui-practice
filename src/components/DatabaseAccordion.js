@@ -20,7 +20,7 @@ function DatabaseAccordion() {
                     sx={{
                         backgroundColor: "gray",
                         marginBottom : '10px'
-                    }}
+                    }} 
                     expandIcon={<ExpandMoreIcon/>}
                     aria-controls="panel1bh-content"
                     id="panel1bh-header"
