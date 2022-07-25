@@ -1,5 +1,15 @@
 import React, {useRef, useState} from "react";
-import {Box, Button, Checkbox, FormControlLabel, Stack} from "@mui/material";
+import {
+    Box,
+    Button,
+    Checkbox,
+    FormControl,
+    FormControlLabel,
+    FormHelperText,
+    InputLabel,
+    Select,
+    Stack
+} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {mainNavbarItems} from "../consts/navbaritems";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -25,21 +35,22 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 
 const options = ['Create a merge commit', 'Squash and merge', 'Rebase and merge', 'you see nothing in here'];
 
-const BootstrapButton = styled(Button)({
+const BootstrapButton = styled(Button)((props) => ({
     color: 'white',
     textTransform: 'none',
-    border: '1px solid #0063cc',
-    backgroundColor: '#0063cc',
+    border: props.isDisabled ? '1px solid grey' : '1px solid #0063cc',
+    backgroundColor: props.isDisabled ? 'grey' : '#0062cc',
     '&:hover': {
-        backgroundColor: 'white',
-        color: '#0062cc',
-        borderColor: '#0062cc',
+        backgroundColor: props.isDisabled ? 'grey' : 'white',
+        color: props.isDisabled ? 'white' : '#0062cc',
+        borderColor: props.isDisabled ? 'grey' : '#0062cc',
         boxShadow: 'none',
+        cursor: props.isDisabled ? 'not-allowed' : 'pointer',
     },
     '&:focus': {
         boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
     },
-});
+}));
 
 const StyledRating = styled(Rating)({
     '& .MuiRating-iconFilled': {
@@ -60,6 +71,7 @@ const Storage = () => {
     const [message, setMessage] = useState('hello madam');
     const [value, setValue] = useState('female');
     const [rateValue, setRateValue] = useState(2);
+    const [age, setAge] = useState('');
 
 
     const handleClick = () => {
@@ -109,6 +121,10 @@ const Storage = () => {
             setMessage('hello madam');
         }
     };
+
+    const handleSelectChange = (event) => {
+        setAge(event.target.value);
+    };
     return (
         <Box sx={{
             padding: '30px 0 10px 20px',
@@ -134,7 +150,7 @@ const Storage = () => {
                     } else {
                         alert('Please check the Checkbox');
                     }
-                }} disabled={!checked}>{check}</BootstrapButton>
+                }} isDisabled={!checked}>{check}</BootstrapButton>
                 <React.Fragment>
                     <ButtonGroup variant="contained" ref={anchorRef} aria-label="split button">
                         <Button onClick={handleClick}>{options[selectedIndex]}</Button>
@@ -204,6 +220,7 @@ const Storage = () => {
                 name="radio-buttons-group"
                 value={value}
                 onChange={handleRadioChange}
+                row
             >
                 <FormControlLabel value="female" control={<Radio/>} label="Female"/>
                 <FormControlLabel value="male" control={<Radio/>} label="Male"/>
@@ -216,9 +233,26 @@ const Storage = () => {
 
                 precision={0.5}
                 icon={<FavoriteIcon fontSize="inherit"/>}
-                emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
+                emptyIcon={<FavoriteBorderIcon fontSize="inherit"/>}
                 max={10}
             />
+            <Box sx={{mt:2}}>
+                <FormControl sx={{ minWidth: 80 }} size={"small"}>
+                    <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        value={age}
+                        label="Age"
+                        autoWidth
+                        onChange={handleSelectChange}
+                    >
+                        <MenuItem value={10}>Ten</MenuItem>
+                        <MenuItem value={20}>Twenty</MenuItem>
+                        <MenuItem value={30}>Thirty</MenuItem>
+                    </Select>
+                    <FormHelperText>Field</FormHelperText>
+                </FormControl>
+            </Box>
         </Box>
     )
 }
