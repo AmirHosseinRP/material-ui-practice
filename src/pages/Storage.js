@@ -6,7 +6,7 @@ import {
     FormControl,
     FormControlLabel,
     FormHelperText,
-    InputLabel,
+    InputLabel, NativeSelect,
     Select,
     Stack
 } from "@mui/material";
@@ -237,20 +237,21 @@ const Storage = () => {
                 max={10}
             />
             <Box sx={{mt:2}}>
-                <FormControl sx={{ minWidth: 80 }} size={"small"}>
-                    <InputLabel id="demo-simple-select-label">Age</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        value={age}
-                        label="Age"
-                        autoWidth
-                        onChange={handleSelectChange}
+                <FormControl sx={{ minWidth: 80 }} >
+                    <InputLabel htmlFor="uncontrolled-native">
+                        Age
+                    </InputLabel>
+                    <NativeSelect
+                        defaultValue={30}
+                        inputProps={{
+                            name: 'age',
+                            id: 'uncontrolled-native',
+                        }}
                     >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
-                    </Select>
-                    <FormHelperText>Field</FormHelperText>
+                        <option value={10}>Ten</option>
+                        <option value={20}>Twenty</option>
+                        <option value={30}>Thirty</option>
+                    </NativeSelect>
                 </FormControl>
             </Box>
         </Box>
