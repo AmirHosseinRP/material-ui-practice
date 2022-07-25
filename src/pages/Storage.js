@@ -6,7 +6,7 @@ import {
     FormControl,
     FormControlLabel,
     FormHelperText,
-    InputLabel, NativeSelect,
+    InputLabel,
     Select,
     Stack
 } from "@mui/material";
@@ -35,7 +35,7 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 
 const options = ['Create a merge commit', 'Squash and merge', 'Rebase and merge', 'you see nothing in here'];
 
-const BootstrapButton = styled(Button)((props) => ({
+const StyledBtn = styled(Button)((props) => ({
     color: 'white',
     textTransform: 'none',
     border: props.isDisabled ? '1px solid grey' : '1px solid #0063cc',
@@ -60,7 +60,7 @@ const StyledRating = styled(Rating)({
         color: '#ff3d47',
     },
 });
-
+let personName = 'Oliver Hansen';
 const Storage = () => {
     const [open, setOpen] = useState(false);
     const anchorRef = useRef(null);
@@ -68,10 +68,22 @@ const Storage = () => {
     const [check, setCheck] = useState('Not Checked');
     const sendBtn = useRef();
     const [checked, setChecked] = useState(false);
-    const [message, setMessage] = useState('hello madam');
-    const [value, setValue] = useState('female');
+    const [gender, setGender] = useState('female');
     const [rateValue, setRateValue] = useState(2);
-    const [age, setAge] = useState('');
+    const [message, setMessage] = useState(`hello miss ${personName}`);
+
+    const names = [
+        'Oliver Hansen',
+        'Van Henry',
+        'April Tucker',
+        'Ralph Hubbard',
+        'Omar Alexander',
+        'Carlos Abbott',
+        'Miriam Wagner',
+        'Bradley Wilkerson',
+        'Virginia Andrews',
+        'Kelly Snyder',
+    ];
 
 
     const handleClick = () => {
@@ -113,18 +125,20 @@ const Storage = () => {
     };
 
     const handleRadioChange = (event) => {
-        setValue(event.target.value);
+        setGender(event.target.value);
         if (event.target.value === 'male') {
-            setMessage('hello sir');
+            setMessage(`hello miss ${personName}`);
         }
         if (event.target.value === 'female') {
-            setMessage('hello madam');
+            setMessage(`hello mr ${personName}`);
         }
     };
 
     const handleSelectChange = (event) => {
-        setAge(event.target.value);
-    };
+        personName = `${event.target.value}`;
+        setMessage(`hello ${gender==='female'? 'miss':'mr' } ${personName}`);
+    }
+
     return (
         <Box sx={{
             padding: '30px 0 10px 20px',
@@ -144,13 +158,13 @@ const Storage = () => {
                 <Button variant={'outlined'} startIcon={<ThumbUpIcon/>}
                         onClick={() => alert(`you rated ${rateValue}`)}>Rate</Button>
                 <IconButton color={'primary'}><DeleteIcon/></IconButton>
-                <BootstrapButton onClick={() => {
+                <StyledBtn onClick={() => {
                     if (check === 'Checked') {
                         alert('You are all set');
                     } else {
                         alert('Please check the Checkbox');
                     }
-                }} isDisabled={!checked}>{check}</BootstrapButton>
+                }} isDisabled={!checked}>{check}</StyledBtn>
                 <React.Fragment>
                     <ButtonGroup variant="contained" ref={anchorRef} aria-label="split button">
                         <Button onClick={handleClick}>{options[selectedIndex]}</Button>
@@ -218,7 +232,7 @@ const Storage = () => {
                               labelPlacement={'start'}/>
             <RadioGroup
                 name="radio-buttons-group"
-                value={value}
+                value={gender}
                 onChange={handleRadioChange}
                 row
             >
@@ -236,22 +250,26 @@ const Storage = () => {
                 emptyIcon={<FavoriteBorderIcon fontSize="inherit"/>}
                 max={10}
             />
-            <Box sx={{mt:2}}>
-                <FormControl sx={{ minWidth: 80 }} >
-                    <InputLabel htmlFor="uncontrolled-native">
-                        Age
-                    </InputLabel>
-                    <NativeSelect
-                        defaultValue={30}
-                        inputProps={{
-                            name: 'age',
-                            id: 'uncontrolled-native',
-                        }}
+            <Box sx={{mt: 2}}>
+                <FormControl sx={{minWidth: 90}} size={"small"}>
+                    <InputLabel id="demo-simple-select-label">Name</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        onChange={handleSelectChange}
+                        value={personName}
+                        label="Name"
+                        autoWidth
                     >
-                        <option value={10}>Ten</option>
-                        <option value={20}>Twenty</option>
-                        <option value={30}>Thirty</option>
-                    </NativeSelect>
+                        {names.map((name, index) => (
+                            <MenuItem
+                                key={index}
+                                value={name}
+                            >
+                                {name}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                    <FormHelperText>Field</FormHelperText>
                 </FormControl>
             </Box>
         </Box>
