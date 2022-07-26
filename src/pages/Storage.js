@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {
     Box,
     Button,
@@ -60,7 +60,7 @@ const StyledRating = styled(Rating)({
         color: '#ff3d47',
     },
 });
-let personName = 'Oliver Hansen';
+
 const Storage = () => {
     const [open, setOpen] = useState(false);
     const anchorRef = useRef(null);
@@ -70,7 +70,13 @@ const Storage = () => {
     const [checked, setChecked] = useState(false);
     const [gender, setGender] = useState('female');
     const [rateValue, setRateValue] = useState(2);
+    const [personName, setPersonName] = useState("Oliver Hansen");
     const [message, setMessage] = useState(`hello miss ${personName}`);
+    const [openSelect, setOpenSelect] = useState(false);
+
+    useEffect(() => {
+        setMessage(`hello ${gender === "female" ? "miss" : "mr"} ${personName}`);
+    }, [personName, gender]);
 
     const names = [
         'Oliver Hansen',
@@ -135,10 +141,16 @@ const Storage = () => {
     };
 
     const handleSelectChange = (event) => {
-        personName = `${event.target.value}`;
-        setMessage(`hello ${gender==='female'? 'miss':'mr' } ${personName}`);
+        setPersonName(event.target.value)
+    };
+
+    const openingSelect = () => {
+        setOpenSelect(true);
     }
 
+    const closingSelect = () => {
+        setOpenSelect(false);
+    }
     return (
         <Box sx={{
             padding: '30px 0 10px 20px',
@@ -165,55 +177,54 @@ const Storage = () => {
                         alert('Please check the Checkbox');
                     }
                 }} isDisabled={!checked}>{check}</StyledBtn>
-                <React.Fragment>
-                    <ButtonGroup variant="contained" ref={anchorRef} aria-label="split button">
-                        <Button onClick={handleClick}>{options[selectedIndex]}</Button>
-                        <Button
-                            size="small"
-                            aria-controls={open ? 'split-button-menu' : undefined}
-                            aria-expanded={open ? 'true' : undefined}
-                            aria-label="select merge strategy"
-                            aria-haspopup="menu"
-                            onClick={handleToggle}
-                        >
-                            <ArrowDropDownIcon/>
-                        </Button>
-                    </ButtonGroup>
-                    <Popper
-                        open={open}
-                        anchorEl={anchorRef.current}
-                        role={undefined}
-                        transition
-                        disablePortal
+
+                <ButtonGroup variant="contained" ref={anchorRef} aria-label="split button">
+                    <Button onClick={handleClick}>{options[selectedIndex]}</Button>
+                    <Button
+                        size="small"
+                        aria-controls={open ? 'split-button-menu' : undefined}
+                        aria-expanded={open ? 'true' : undefined}
+                        aria-label="select merge strategy"
+                        aria-haspopup="menu"
+                        onClick={handleToggle}
                     >
-                        {({TransitionProps, placement}) => (
-                            <Grow
-                                {...TransitionProps}
-                                style={{
-                                    transformOrigin:
-                                        placement === 'bottom' ? 'center top' : 'center bottom',
-                                }}
-                            >
-                                <Paper>
-                                    <ClickAwayListener onClickAway={handleClose}>
-                                        <MenuList id="split-button-menu" autoFocusItem>
-                                            {options.map((option, index) => (
-                                                <MenuItem
-                                                    key={option}
-                                                    disabled={index === 2}
-                                                    selected={index === selectedIndex}
-                                                    onClick={(event) => handleMenuItemClick(event, index)}
-                                                >
-                                                    {option}
-                                                </MenuItem>
-                                            ))}
-                                        </MenuList>
-                                    </ClickAwayListener>
-                                </Paper>
-                            </Grow>
-                        )}
-                    </Popper>
-                </React.Fragment>
+                        <ArrowDropDownIcon/>
+                    </Button>
+                </ButtonGroup>
+                <Popper
+                    open={open}
+                    anchorEl={anchorRef.current}
+                    role={undefined}
+                    transition
+                    disablePortal
+                >
+                    {({TransitionProps, placement}) => (
+                        <Grow
+                            {...TransitionProps}
+                            style={{
+                                transformOrigin:
+                                    placement === 'bottom' ? 'center top' : 'center bottom',
+                            }}
+                        >
+                            <Paper>
+                                <ClickAwayListener onClickAway={handleClose}>
+                                    <MenuList id="split-button-menu" autoFocusItem>
+                                        {options.map((option, index) => (
+                                            <MenuItem
+                                                key={option}
+                                                disabled={index === 2}
+                                                selected={index === selectedIndex}
+                                                onClick={(event) => handleMenuItemClick(event, index)}
+                                            >
+                                                {option}
+                                            </MenuItem>
+                                        ))}
+                                    </MenuList>
+                                </ClickAwayListener>
+                            </Paper>
+                        </Grow>
+                    )}
+                </Popper>
             </Stack>
             <FormControlLabel control={
                 <Checkbox onChange={handleCheckboxChange}
@@ -254,15 +265,17 @@ const Storage = () => {
                 <FormControl sx={{minWidth: 90}} size={"small"}>
                     <InputLabel id="demo-simple-select-label">Name</InputLabel>
                     <Select
-                        labelId="demo-simple-select-label"
+                        open={openSelect}
                         onChange={handleSelectChange}
                         value={personName}
                         label="Name"
                         autoWidth
+                        onOpen={openingSelect}
+                        onClose={closingSelect}
                     >
-                        {names.map((name, index) => (
+                        {names.map((name) => (
                             <MenuItem
-                                key={index}
+                                key={name}
                                 value={name}
                             >
                                 {name}
@@ -271,6 +284,7 @@ const Storage = () => {
                     </Select>
                     <FormHelperText>Field</FormHelperText>
                 </FormControl>
+                <Button onClick={openingSelect}>open select</Button>
             </Box>
         </Box>
     )

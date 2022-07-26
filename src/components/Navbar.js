@@ -61,7 +61,9 @@ function NavBar() {
                     </Typography>
                     <Box sx={{display: {xs:'none',sm: 'none', md: 'flex'}}}>
                         {mainNavbarItems.map((item) => (
+
                                 <Link to={item.route}
+                                      key={item.id}
                                       style={{textDecoration: 'none'}}>
                                     <ListItem
                                         sx={menuStyle} button>
@@ -101,11 +103,11 @@ function NavBar() {
                     <List>
                         {mainNavbarItems.map((item) => (
                             <Link to={item.route}
+                                  key={item.id}
                                   style={{textDecoration: 'none'}}>
                                 <ListItem
                                     sx={linkStyle}
                                     button
-                                    key={item.id}
                                     disablePadding
                                     onClick={handleDrawerToggle}
                                 >
