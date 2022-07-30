@@ -3,7 +3,7 @@ import {Box} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {mainNavbarItems} from "../consts/navbaritems";
 
-const Functions = () => {
+const BootstrapPage = () => {
     return (
         <Box sx={{
             padding: '30px 0 10px 20px',
@@ -63,4 +63,4 @@ const Functions = () => {
     )
 }
 
-export default Functions;
+export default BootstrapPage;

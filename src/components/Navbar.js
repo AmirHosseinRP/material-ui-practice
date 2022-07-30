@@ -55,7 +55,7 @@ function NavBar() {
                     <Typography
                         variant="h6"
                         component="div"
-                        sx={{flexGrow: 1, display: {xs:'none',sm: 'none', md: 'block'}}}
+                        sx={{flexGrow: 1,marginLeft:'1rem'}}
                     >
                         Material UI
                     </Typography>

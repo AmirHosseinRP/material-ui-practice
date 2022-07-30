@@ -4,7 +4,7 @@ import {Box} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import DatabaseAccordion from "../components/DatabaseAccordion";
 
-const Database = () => {
+const AccordionPage = () => {
     return (
         <Box sx={{
             padding: '30px 0 10px 20px',
@@ -22,4 +22,4 @@ const Database = () => {
         </Box>
     )
 }
-export default Database;
+export default AccordionPage;

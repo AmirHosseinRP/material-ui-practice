@@ -9,7 +9,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 const usersList = 'https://api.github.com/users';
 
 
-const MachineLearning = () => {
+const ApiPage = () => {
 
     const [users, setUsers] = useState([]);
 
@@ -71,4 +71,4 @@ const MachineLearning = () => {
     )
 }
 
-export default MachineLearning;
+export default ApiPage;

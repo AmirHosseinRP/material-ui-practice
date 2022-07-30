@@ -1,13 +1,10 @@
 import React from "react";
-import {Box, Button} from "@mui/material";
+import {Box} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {mainNavbarItems} from "../consts/navbaritems";
 import AuthenticationModal from "../components/AuthenticationModal";
-import SendIcon from '@mui/icons-material/Send';
-import DeleteIcon from '@mui/icons-material/Delete';
-import IconButton from "@mui/material/IconButton";
 
-const Authentication = () => {
+const ModalPage = () => {
 
     return (
         <Box sx={{
@@ -28,4 +25,4 @@ const Authentication = () => {
     )
 }
 
-export default Authentication;
+export default ModalPage;

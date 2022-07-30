@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import {mainNavbarItems} from "../consts/navbaritems";
 import {useLocalStorage} from '../Hooks/useLocalStorage'
 
-const Hosting = () => {
+const CookiePage = () => {
     const [name, setName] = useLocalStorage("name", "please enter your name");
     const textInputRef = useRef();
 
@@ -65,4 +65,4 @@ const Hosting = () => {
     )
 }
 
-export default Hosting;
+export default CookiePage;

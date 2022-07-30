@@ -61,7 +61,7 @@ const StyledRating = styled(Rating)({
     },
 });
 
-const Storage = () => {
+const FormPage = () => {
     const [open, setOpen] = useState(false);
     const anchorRef = useRef(null);
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -302,4 +302,4 @@ const Storage = () => {
     )
 }
 
-export default Storage;
+export default FormPage;
