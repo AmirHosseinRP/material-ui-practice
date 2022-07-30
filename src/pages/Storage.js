@@ -5,10 +5,10 @@ import {
     Checkbox,
     FormControl,
     FormControlLabel,
-    FormHelperText,
+    FormHelperText, InputAdornment,
     InputLabel,
     Select,
-    Stack
+    Stack, TextField
 } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {mainNavbarItems} from "../consts/navbaritems";
@@ -24,7 +24,7 @@ import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import {pink} from "@mui/material/colors";
-import {Favorite, FavoriteBorder} from "@mui/icons-material";
+import {AccountCircle, Favorite, FavoriteBorder} from "@mui/icons-material";
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import Rating from '@mui/material/Rating';
@@ -64,7 +64,7 @@ const StyledRating = styled(Rating)({
 const Storage = () => {
     const [open, setOpen] = useState(false);
     const anchorRef = useRef(null);
-    const [selectedIndex, setSelectedIndex] = useState(1);
+    const [selectedIndex, setSelectedIndex] = useState(0);
     const [check, setCheck] = useState('Not Checked');
     const sendBtn = useRef();
     const [checked, setChecked] = useState(false);
@@ -286,6 +286,18 @@ const Storage = () => {
                 </FormControl>
                 <Button onClick={openingSelect}>open select</Button>
             </Box>
+            <TextField
+                id="input-with-icon-textfield"
+                label="TextField"
+                InputProps={{
+                    startAdornment: (
+                        <InputAdornment position="start">
+                            <AccountCircle />
+                        </InputAdornment>
+                    ),
+                }}
+                variant="standard"
+            />
         </Box>
     )
 }

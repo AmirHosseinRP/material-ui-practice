@@ -23,6 +23,16 @@ const Hosting = () => {
         }
     }
 
+    const handleKeyPress = (event) => {
+        if(event.key === 'Enter'){
+            if (textInputRef.current.value !== '') {
+                setName(textInputRef.current.value)
+            } else {
+                setName('please enter your name');
+            }
+        }
+    }
+
     return (
         <Box sx={{
             padding: '30px 0 10px 20px',
@@ -46,6 +56,7 @@ const Hosting = () => {
                         type="text"
                         inputRef={textInputRef}
                         size={"small"}
+                        onKeyPress={handleKeyPress}
                     />
                     <Button onClick={handleEnter} variant={'contained'}>Click</Button>
                 </Stack>

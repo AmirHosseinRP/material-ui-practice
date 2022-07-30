@@ -61,7 +61,6 @@ function NavBar() {
                     </Typography>
                     <Box sx={{display: {xs:'none',sm: 'none', md: 'flex'}}}>
                         {mainNavbarItems.map((item) => (
-
                                 <Link to={item.route}
                                       key={item.id}
                                       style={{textDecoration: 'none'}}>
