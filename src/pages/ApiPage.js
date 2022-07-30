@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Avatar, Box ,Grid, ListItem, ListItemAvatar, ListItemText} from "@mui/material";
+import {Avatar, Box, CircularProgress, Grid, ListItem, ListItemAvatar, ListItemText, Stack} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {mainNavbarItems} from "../consts/navbaritems";
 import List from "@mui/material/List";
@@ -11,12 +11,14 @@ const usersList = 'https://api.github.com/users';
 
 const ApiPage = () => {
 
+    const [isLoading, setIsLoading] = useState(true);
     const [users, setUsers] = useState([]);
 
     const getUsers = async () => {
         const response = await fetch(usersList);
         const users = await response.json();
         setUsers(users);
+        setIsLoading(false);
     }
 
     const listItemStyle = {
@@ -26,9 +28,9 @@ const ApiPage = () => {
     };
 
     const iconBtnStyle = {
-        color : 'grey',
+        color: 'grey',
         '&:hover': {
-           color: 'black',
+            color: 'black',
         }
     }
 
@@ -36,6 +38,31 @@ const ApiPage = () => {
         getUsers();
     }, []);
 
+
+    if (isLoading) {
+        return (
+            <Box sx={{
+                padding: '30px 10px 10px 20px',
+                fontWeight: 'bold',
+            }}>
+                <Typography
+                    variant="h3"
+                    component="div"
+                    sx={{
+                        padding: '0 0 20px 0',
+                        fontWeight: 'bold',
+                    }}
+                >{mainNavbarItems[5].label}</Typography>
+                <Stack
+                    justifyContent="center"
+                    alignItems="center"
+                    spacing={4}>
+                    <CircularProgress size={100}/>
+                    <h1 style={{paddingLeft:'20px'}}>Loading ...</h1>
+                </Stack>
+            </Box>
+        )
+    }
 
     return (
         <Box sx={{
@@ -61,7 +88,8 @@ const ApiPage = () => {
                                     </Avatar>
                                 </ListItemAvatar>
                                 <ListItemText>{login}</ListItemText>
-                                <IconButton sx={iconBtnStyle} href={html_url} target={'_blank'}><AccountCircleIcon/></IconButton>
+                                <IconButton sx={iconBtnStyle} href={html_url}
+                                            target={'_blank'}><AccountCircleIcon/></IconButton>
                             </ListItem>
                         </Grid>
                     })}

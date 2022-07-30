@@ -35,17 +35,17 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 
 const options = ['Create a merge commit', 'Squash and merge', 'Rebase and merge', 'you see nothing in here'];
 
-const StyledBtn = styled(Button)((props) => ({
+const StyledBtn = styled(Button)((isBtnDisabled) => ({
     color: 'white',
     textTransform: 'none',
-    border: props.isDisabled ? '1px solid grey' : '1px solid #0063cc',
-    backgroundColor: props.isDisabled ? 'grey' : '#0062cc',
+    border: isBtnDisabled ? '1px solid grey' : '1px solid #0063cc',
+    backgroundColor: isBtnDisabled ? 'grey' : '#0062cc',
     '&:hover': {
-        backgroundColor: props.isDisabled ? 'grey' : 'white',
-        color: props.isDisabled ? 'white' : '#0062cc',
-        borderColor: props.isDisabled ? 'grey' : '#0062cc',
+        backgroundColor: isBtnDisabled ? 'grey' : 'white',
+        color: isBtnDisabled ? 'white' : '#0062cc',
+        borderColor: isBtnDisabled ? 'grey' : '#0062cc',
         boxShadow: 'none',
-        cursor: props.isDisabled ? 'not-allowed' : 'pointer',
+        cursor: isBtnDisabled ? 'not-allowed' : 'pointer',
     },
     '&:focus': {
         boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
@@ -176,7 +176,7 @@ const FormPage = () => {
                     } else {
                         alert('Please check the Checkbox');
                     }
-                }} isDisabled={!checked}>{check}</StyledBtn>
+                }} isBtnDisabled={!checked}>{check}</StyledBtn>
 
                 <ButtonGroup variant="contained" ref={anchorRef} aria-label="split button">
                     <Button onClick={handleClick}>{options[selectedIndex]}</Button>
