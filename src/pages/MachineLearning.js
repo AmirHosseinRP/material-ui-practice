@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {Avatar, Box, Grid, ListItem, ListItemAvatar, ListItemText} from "@mui/material";
+import {Avatar, Box ,Grid, ListItem, ListItemAvatar, ListItemText} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {mainNavbarItems} from "../consts/navbaritems";
 import List from "@mui/material/List";
+import IconButton from "@mui/material/IconButton";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const usersList = 'https://api.github.com/users';
 
@@ -23,6 +25,13 @@ const MachineLearning = () => {
         boxShadow: '5px 5px 5px 0 grey'
     };
 
+    const iconBtnStyle = {
+        color : 'grey',
+        '&:hover': {
+           color: 'black',
+        }
+    }
+
     useEffect(() => {
         getUsers();
     }, []);
@@ -42,9 +51,9 @@ const MachineLearning = () => {
                 }}
             >{mainNavbarItems[5].label}</Typography>
             <List>
-                <Grid container spacing={3} columnSpacing={4} sx={{paddingRight:'1rem'}}>
+                <Grid container spacing={3} columnSpacing={4} sx={{paddingRight: '1rem'}}>
                     {users.map((user) => {
-                        const {id, login, avatar_url} = user;
+                        const {id, login, avatar_url, html_url} = user;
                         return <Grid item xs={12} sm={6} md={4} key={id}>
                             <ListItem sx={listItemStyle}>
                                 <ListItemAvatar>
@@ -52,6 +61,7 @@ const MachineLearning = () => {
                                     </Avatar>
                                 </ListItemAvatar>
                                 <ListItemText>{login}</ListItemText>
+                                <IconButton sx={iconBtnStyle} href={html_url} target={'_blank'}><AccountCircleIcon/></IconButton>
                             </ListItem>
                         </Grid>
                     })}
