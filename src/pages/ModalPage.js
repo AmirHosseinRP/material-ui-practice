@@ -43,9 +43,9 @@ const ModalPage = () => {
             </PeopleContext.Provider>
             <List>
                 <Grid container spacing={3} columnSpacing={4} sx={{paddingRight: '1rem'}}>
-                    {people.map((person) => {
+                    {people.map((person,index) => {
                         const {fullName,email,age} = person;
-                        return <Grid item xs={12} sm={6} md={4}>
+                        return <Grid item xs={12} sm={6} md={4} key={index}>
                             <ListItem sx={listItemStyle}>
                                 <ListItemText><strong>Name :</strong> {fullName}</ListItemText>
                                 <ListItemText><strong>Email :</strong> {email}</ListItemText>

@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import {useContext, useState} from "react";
 import {Button, FormControl, Stack, TextField} from "@mui/material";
-import {PersonContext,PeopleContext} from '../pages/ModalPage'
+import {PersonContext, PeopleContext} from '../pages/ModalPage'
 
 
 const style = {
@@ -24,8 +24,8 @@ function AuthenticationModal() {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const [person,setPerson] = useContext(PersonContext);
-    const [people,setPeople] = useContext(PeopleContext);
+    const [person, setPerson] = useContext(PersonContext);
+    const [people, setPeople] = useContext(PeopleContext);
 
     const handleChange = (e) => {
         const name = e.target.name;
@@ -36,15 +36,24 @@ function AuthenticationModal() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (person.fullName && person.email && person.age) {
-            setPeople([...people,person]);
+            setPeople([...people, person]);
             setPerson({fullName: '', email: '', age: ''});
             handleClose();
         }
     }
 
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            if (person.fullName && person.email && person.age) {
+                setPeople([...people, person]);
+                setPerson({fullName: '', email: '', age: ''});
+                handleClose();
+            }
+        }
+    }
     return (
         <div>
-            <Button sx={{marginBottom:'1rem'}} onClick={handleOpen} variant={"contained"}>add a user</Button>
+            <Button sx={{marginBottom: '1rem'}} onClick={handleOpen} variant={"contained"}>add a user</Button>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -53,7 +62,7 @@ function AuthenticationModal() {
             >
                 <Box sx={style}>
                     <Stack>
-                        <FormControl>
+                        <FormControl onKeyPress={handleKeyPress}>
                             <TextField label={'Name'}
                                        variant={'outlined'}
                                        size={'small'}
