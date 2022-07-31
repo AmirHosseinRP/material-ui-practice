@@ -1,39 +1,50 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import {useState} from "react";
-import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
-import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
-import PrimaryButton from "./PrimaryButton";
+import {useContext, useState} from "react";
+import {Button, FormControl, Stack, TextField} from "@mui/material";
+import {PersonContext,PeopleContext} from '../pages/ModalPage'
+
 
 const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
+    width: '30rem',
     transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
+    backgroundColor: 'background.paper',
     border: '2px solid #000',
+    borderRadius: '.5rem',
     boxShadow: 24,
     p: 4,
 };
 
+
 function AuthenticationModal() {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const [btnText,btnTextSet] = useState(()=><SentimentVeryDissatisfiedIcon/>);
-    function hoverIn() {
-        btnTextSet(()=><SentimentSatisfiedAltIcon/>);
+    const [person,setPerson] = useContext(PersonContext);
+    const [people,setPeople] = useContext(PeopleContext);
+
+    const handleChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setPerson({...person, [name]: value})
     }
-    function hoverOut() {
-        btnTextSet(()=><SentimentVeryDissatisfiedIcon/>);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (person.fullName && person.email && person.age) {
+            setPeople([...people,person]);
+            setPerson({fullName: '', email: '', age: ''});
+            handleClose();
+        }
     }
 
     return (
         <div>
-            <PrimaryButton onMouseEnter={hoverIn} onMouseLeave={hoverOut} onClick={handleOpen}>{btnText}</PrimaryButton>
+            <Button sx={{marginBottom:'1rem'}} onClick={handleOpen} variant={"contained"}>add a user</Button>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -41,12 +52,39 @@ function AuthenticationModal() {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Modal Header
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        this is gonna be the modal body
-                    </Typography>
+                    <Stack>
+                        <FormControl>
+                            <TextField label={'Name'}
+                                       variant={'outlined'}
+                                       size={'small'}
+                                       sx={{margin: '.5rem'}}
+                                       value={person.fullName}
+                                       onChange={handleChange}
+                                       name={'fullName'}
+                            >Name</TextField>
+                            <TextField label={'Email'}
+                                       variant={'outlined'}
+                                       size={'small'}
+                                       sx={{margin: '.5rem'}}
+                                       value={person.email}
+                                       onChange={handleChange}
+                                       name={'email'}
+                            >Email</TextField>
+                            <TextField label={'Age'}
+                                       variant={'outlined'}
+                                       size={'small'}
+                                       sx={{margin: '.5rem'}}
+                                       value={person.age}
+                                       onChange={handleChange}
+                                       name={'age'}
+                            >Age</TextField>
+                            <Button type={'submit'}
+                                    variant={"contained"}
+                                    sx={{margin: '1.5rem 4rem 0 4rem'}}
+                                    onClick={handleSubmit}
+                            >Submit</Button>
+                        </FormControl>
+                    </Stack>
                 </Box>
             </Modal>
         </div>

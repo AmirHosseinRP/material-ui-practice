@@ -19,7 +19,7 @@ const ApiPage = () => {
         const users = await response.json();
         setUsers(users);
         setIsLoading(false);
-    }
+    } 
 
     const listItemStyle = {
         backgroundColor: '#e5e5e5',

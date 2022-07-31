@@ -1,12 +1,13 @@
 import React from "react";
 import {Button, createTheme, styled, ThemeProvider} from "@mui/material";
-import {blueGrey, green, indigo, purple} from "@mui/material/colors";
+import {indigo} from "@mui/material/colors";
 
-const CustomStyledButton = styled(Button)(({ theme }) => ({
+const CustomStyledButton = styled(Button)(({theme}) => ({
     backgroundColor: theme.status.primary,
+    border: `2px solid ${theme.status.primary}`,
+    height:'2.3rem',
     '&:hover': {
         backgroundColor: 'white',
-        outline: `2px solid ${theme.status.primary}`,
         color: theme.status.primary,
         borderRadius: '50px',
     }
@@ -27,7 +28,7 @@ function PrimaryButton(props) {
     return (
         <ThemeProvider theme={theme}>
             <CustomStyledButton variant={"contained"} onClick={props.onClick} onMouseEnter={props.onMouseEnter}
-                    onMouseLeave={props.onMouseLeave} sx={myStyle}>{innerHTMLText}</CustomStyledButton>
+                                onMouseLeave={props.onMouseLeave} sx={myStyle}>{innerHTMLText}</CustomStyledButton>
         </ThemeProvider>
     )
 }
